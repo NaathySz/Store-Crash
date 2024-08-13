@@ -1,4 +1,4 @@
-﻿using CounterStrikeSharp.API;
+using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
 using CounterStrikeSharp.API.Modules.Commands;
@@ -27,6 +27,9 @@ public class Store_CrashConfig : BasePluginConfig
 
     [JsonPropertyName("crash_commands")]
     public List<string> CrashCommands { get; set; } = ["crash"];
+
+    [JsonPropertyName("crash_command_cooldown")]
+    public int CrashCommandCooldown { get; set; } = 10;
 
     [JsonPropertyName("multiplier_ranges")]
     public List<MultiplierRange> MultiplierRanges { get; set; } = new()
@@ -74,13 +77,14 @@ public class CrashGame
 public class Store_Crash : BasePlugin, IPluginConfig<Store_CrashConfig>
 {
     public override string ModuleName => "Store Module [Crash]";
-    public override string ModuleVersion => "0.1.0";
+    public override string ModuleVersion => "0.2.0";
     public override string ModuleAuthor => "Nathy";
 
     private readonly Random random = new();
     public IStoreApi? StoreApi { get; set; }
     public Store_CrashConfig Config { get; set; } = new();
     private readonly ConcurrentDictionary<string, CrashGame> activeGames = new();
+    private readonly ConcurrentDictionary<string, DateTime> playerLastCrashCommandTimes = new();
 
     public override void OnAllPluginsLoaded(bool hotReload)
     {
@@ -112,39 +116,52 @@ public class Store_Crash : BasePlugin, IPluginConfig<Store_CrashConfig>
 
         if (StoreApi == null) throw new Exception("StoreApi could not be located.");
 
+        if (playerLastCrashCommandTimes.TryGetValue(player.SteamID.ToString(), out var lastCommandTime))
+        {
+            var cooldownRemaining = (DateTime.Now - lastCommandTime).TotalSeconds;
+            if (cooldownRemaining < Config.CrashCommandCooldown)
+            {
+                var secondsRemaining = (int)(Config.CrashCommandCooldown - cooldownRemaining);
+                info.ReplyToCommand(Localizer["Prefix"] + Localizer["In cooldown", secondsRemaining]);
+                return;
+            }
+        }
+
+        playerLastCrashCommandTimes[player.SteamID.ToString()] = DateTime.Now;
+
         if (!int.TryParse(info.GetArg(1), out int credits))
         {
-            info.ReplyToCommand(Localizer["Invalid amount of credits"]);
+            info.ReplyToCommand(Localizer["Prefix"] + Localizer["Invalid amount of credits"]);
             return;
         }
 
         if (!float.TryParse(info.GetArg(2), out float targetMultiplier))
         {
-            info.ReplyToCommand(Localizer["Invalid multiplier"]);
+            info.ReplyToCommand(Localizer["Prefix"] + Localizer["Invalid multiplier"]);
             return;
         }
 
         if (credits < Config.MinBet)
         {
-            info.ReplyToCommand(Localizer["Minimum bet amount", Config.MinBet]);
+            info.ReplyToCommand(Localizer["Prefix"] + Localizer["Minimum bet amount", Config.MinBet]);
             return;
         }
 
         if (credits > Config.MaxBet)
         {
-            info.ReplyToCommand(Localizer["Maximum bet amount", Config.MaxBet]);
+            info.ReplyToCommand(Localizer["Prefix"] + Localizer["Maximum bet amount", Config.MaxBet]);
             return;
         }
 
         if (targetMultiplier < Config.MinMultiplier || targetMultiplier > Config.MaxMultiplier)
         {
-            info.ReplyToCommand(Localizer["Multiplier range", Config.MinMultiplier, Config.MaxMultiplier]);
+            info.ReplyToCommand(Localizer["Prefix"] + Localizer["Multiplier range", Config.MinMultiplier, Config.MaxMultiplier]);
             return;
         }
 
         if (StoreApi.GetPlayerCredits(player) < credits)
         {
-            info.ReplyToCommand(Localizer["Not enough credits"]);
+            info.ReplyToCommand(Localizer["Prefix"] + Localizer["Not enough credits"]);
             return;
         }
 
@@ -155,7 +172,7 @@ public class Store_Crash : BasePlugin, IPluginConfig<Store_CrashConfig>
     private void StartCrashGame(CCSPlayerController player, int credits, float targetMultiplier, float crashMultiplier)
     {
         StoreApi!.GivePlayerCredits(player, -credits);
-        player.PrintToChat(Localizer["Bet placed", credits, targetMultiplier]);
+        player.PrintToChat(Localizer["Prefix"] + Localizer["Bet placed", credits, targetMultiplier]);
 
         var game = new CrashGame(player, credits, targetMultiplier, crashMultiplier);
         activeGames[player.SteamID.ToString()] = game;
@@ -191,11 +208,11 @@ public class Store_Crash : BasePlugin, IPluginConfig<Store_CrashConfig>
         {
             int winnings = (int)(game.BetCredits * targetMultiplier);
             StoreApi!.GivePlayerCredits(game.Player, winnings);
-            game.Player.PrintToChat(Localizer["Bet win", winnings.ToString(), targetMultiplier.ToString("0.00"), actualMultiplier.ToString("0.00")]);
+            game.Player.PrintToChat(Localizer["Prefix"] + Localizer["Bet win", winnings.ToString(), targetMultiplier.ToString("0.00"), actualMultiplier.ToString("0.00")]);
         }
         else
         {
-            game.Player.PrintToChat(Localizer["Bet lost", actualMultiplier.ToString("0.00"), targetMultiplier.ToString("0.00")]);
+            game.Player.PrintToChat(Localizer["Prefix"] + Localizer["Bet lost", actualMultiplier.ToString("0.00"), targetMultiplier.ToString("0.00")]);
         }
 
         game.IsActive = false;
