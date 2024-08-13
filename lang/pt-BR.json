@@ -10,7 +10,7 @@
     "Bet placed": "Você apostou {green}{0} {white}créditos com o multiplicador de {green}{1}",
     "Bet win": "Parabéns! Você ganhou {green}{0} {white}créditos com o multiplicador de {green}{1}{white}. O crash aconteceu em {green}{2}",
     "Bet lost": "Infelizmente, o multiplicador crashou em {green}{0}{white}. Você apostou {green}{1}{white}. Boa sorte da próxima vez!",
-    "In cooldown": "Você deve esperar {0} segundos antes de iniciar outro crash",
+    "In cooldown": "Você deve esperar {red}{0} {white}segundos antes de iniciar outro crash",
     
     "Current multiplier": "Multiplicador atual: ",
     "Multiplier crashed": "O multiplicador crashou em: "
