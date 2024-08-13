@@ -13,6 +13,7 @@ Config will be auto generated. Default:
   "crash_commands": [
     "crash"
   ],
+  "crash_command_cooldown": 10,
   "multiplier_ranges": [
     {
       "start": 1.0,
