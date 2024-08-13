@@ -1,14 +1,17 @@
 {
-  "Invalid amount of credits": "{red}[Crash] {white}Geçersiz kredi miktarı. Lütfen bir sayı girin.",
-  "Invalid multiplier": "{red}[Crash] {white}Geçersiz çarpan. Lütfen geçerli bir sayı girin.",
-  "Minimum bet amount": "{red}[Crash] {white}Minimum bahis miktarı {green}{0} {white}kredi.",
-  "Maximum bet amount": "{red}[Crash] {white}Maksimum bahis miktarı {green}{0} {white}kredi.",
-  "Multiplier range": "{red}[Crash] {white}Çarpan {green}{0} {white}ve {green}{1} {white}arasında olmalıdır.",
-  "Not enough credits": "{red}[Crash] {white}You do not have enough credits to place this bet",
-  "Bet placed": "{red}[Crash] {white}Bahis {green}{0} {white}kredi ve {green}{1} {white}çarpanla oynandı.",
-  "Bet win": "{red}[Crash] {white}Tebrikler! {green}{1} {white}çarpanla {green}{0} {white}kredi kazandın. Kaza {green}{0} {white}çarpanda gerçekleşti.",
-  "Bet lost": "{red}[Crash] {white}Maalesef, {green}{1} {white}kredi kaybettiniz. Kaza {green}{0} {white}çarpanda gerçekleşti.",
+    "Prefix": "{red}[Crash] {white}",
 
-  "Current multiplier": "Şu anki çarpan: ",
-  "Multiplier crashed": "Kazanın gerçekleştiği çarpan: "
+    "Invalid amount of credits": "Geçersiz kredi miktarı. Lütfen bir sayı girin.",
+    "Invalid multiplier": "Geçersiz çarpan. Lütfen geçerli bir sayı girin.",
+    "Minimum bet amount": "Minimum bahis miktarı {green}{0} {white}kredi.",
+    "Maximum bet amount": "Maksimum bahis miktarı {green}{0} {white}kredi.",
+    "Multiplier range": "Çarpan {green}{0} {white}ve {green}{1} {white}arasında olmalıdır.",
+    "Not enough credits": "You do not have enough credits to place this bet",
+    "Bet placed": "Bahis {green}{0} {white}kredi ve {green}{1} {white}çarpanla oynandı.",
+    "Bet win": "Tebrikler! {green}{1} {white}çarpanla {green}{0} {white}kredi kazandın. Kaza {green}{0} {white}çarpanda gerçekleşti.",
+    "Bet lost": "Maalesef, {green}{1} {white}kredi kaybettiniz. Kaza {green}{0} {white}çarpanda gerçekleşti.",
+    "In cooldown": "Başka bir crash başlatmadan önce {red}{0} {white}saniye beklemelisiniz.",
+  
+    "Current multiplier": "Şu anki çarpan: ",
+    "Multiplier crashed": "Kazanın gerçekleştiği çarpan: "
 }
