@@ -1,7 +1,7 @@
 {
     "Prefix": "{red}[Crash] {white}",
 
-    "Invalid amount of credits": "Geçersiz kredi miktarı. Lütfen bir sayı girin.",
+    "Invalid amount of credits": "Geçersiz kredi miktarı. Lütfen geçerli miktar girin.",
     "Invalid multiplier": "Geçersiz çarpan. Lütfen geçerli bir sayı girin.",
     "Minimum bet amount": "Minimum bahis miktarı {green}{0} {white}kredi.",
     "Maximum bet amount": "Maksimum bahis miktarı {green}{0} {white}kredi.",
