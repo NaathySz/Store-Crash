@@ -10,8 +10,8 @@
     "Bet placed": "Bahis {green}{0} {white}kredi ve {green}{1} {white}çarpanla oynandı.",
     "Bet win": "Tebrikler! {green}{1} {white}çarpanla {green}{0} {white}kredi kazandın. Kaza {green}{0} {white}çarpanda gerçekleşti.",
     "Bet lost": "Maalesef, {green}{1} {white}kredi kaybettiniz. Kaza {green}{0} {white}çarpanda gerçekleşti.",
-    "In cooldown": "Başka bir crash başlatmadan önce {red}{0} {white}saniye beklemelisiniz.",
+    "In cooldown": "Başka bir crash oyunu başlatmadan önce {red}{0} {white}saniye beklemelisiniz."
   
-    "Current multiplier": "Şu anki çarpan: ",
-    "Multiplier crashed": "Kazanın gerçekleştiği çarpan: "
+    "Current multiplier": "Çarpan: ",
+    "Multiplier crashed": "Crash Şurada Patladı: "
 }
