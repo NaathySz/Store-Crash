@@ -6,7 +6,7 @@
     "Minimum bet amount": "Minimum bahis miktarı {green}{0} {white}kredi.",
     "Maximum bet amount": "Maksimum bahis miktarı {green}{0} {white}kredi.",
     "Multiplier range": "Çarpan {green}{0} {white}ve {green}{1} {white}arasında olmalıdır.",
-    "Not enough credits": "You do not have enough credits to place this bet",
+    "Not enough credits": "Yeterli kredin yok!",
     "Bet placed": "Bahis {green}{0} {white}kredi ve {green}{1} {white}çarpanla oynandı.",
     "Bet win": "Tebrikler! {green}{1} {white}çarpanla {green}{0} {white}kredi kazandın. Kaza {green}{0} {white}çarpanda gerçekleşti.",
     "Bet lost": "Maalesef, {green}{1} {white}kredi kaybettiniz. Kaza {green}{0} {white}çarpanda gerçekleşti.",
